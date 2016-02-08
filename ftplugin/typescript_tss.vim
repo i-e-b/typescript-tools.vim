@@ -28,7 +28,7 @@ let g:TSSloaded = 1
 
 " assume tss is a globally available command
 if !exists("g:TSS")
-  let g:TSS = ["tss"]
+  let g:TSS = ["tss","--module","commonjs"]
 endif
 
 " assume user wants to inspect errors on project load/reload
@@ -467,8 +467,7 @@ function! TSSstart(...)
 echomsg "starting TSS..."
 python <<EOF
 
-cmd = vim.eval("g:TSS")+vim.eval("a:000")
-print(cmd)
+cmd = ["tss","--module","commonjs"]+vim.eval("a:000")
 tss = subprocess.Popen(cmd
                       ,bufsize=0
                       ,stdin=subprocess.PIPE
